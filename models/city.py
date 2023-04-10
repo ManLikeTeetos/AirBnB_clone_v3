@@ -19,3 +19,9 @@ class City(BaseModel, Base):
     state_id = Column(String(60), ForeignKey('states.id'), nullable=False)
     places = relationship("Place", cascade='all, delete, delete-orphan',
                           backref="cities")
+
+    def __init__(self, *args, **kwargs):
+        """Instantiation of city class"""
+        super().__init__(*args, **kwargs)
+        self.name = kwargs.get('name', '')
+        self.state_id = kwargs.get('state_id', '')
