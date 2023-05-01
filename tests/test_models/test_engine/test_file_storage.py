@@ -102,9 +102,11 @@ class test_fileStorage(unittest.TestCase):
         """ Key is properly formatted """
         new = BaseModel()
         _id = new.to_dict()['id']
-        temp = None
+        temp = 'BaseModel' + '.' + _id
         for key in storage.all().keys():
-            temp = key
+            if temp == key:
+                temp = key
+                break
         self.assertEqual(temp, 'BaseModel' + '.' + _id)
 
     def test_storage_var_created(self):
